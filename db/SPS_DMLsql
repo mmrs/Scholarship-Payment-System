@@ -1,0 +1,28 @@
+
+--USERS TABLE--
+DELETE FROM USERS;
+INSERT INTO USERS VALUES('admin', 'admin','a',1);
+INSERT INTO USERS VALUES('siyam', 'siyam','s',2);
+
+
+--INSTITUTIONS TABLE--
+DELETE FROM INSTITUTIONS;
+INSERT INTO INSTITUTIONS VALUES(1,'Bindu Basini Govt Boys High School, Tangail','Zilla Sadar Road', 'Tangail', 'Dhaka', 'SSC');
+INSERT INTO INSTITUTIONS VALUES(2,'major General Mahmudul Hasan College, Tangail','Zilla Sadar Road', 'Tangail', 'Dhaka', 'HSC');
+
+
+select * from institutions
+
+--STUDENTS TABLE--
+DELETE FROM STUDENTS;
+
+INSERT INTO STUDENTS VALUES(
+1,
+2,
+'Moshiur', 'Rahman',
+'Majed Ali','Parvin Akter',
+'M',
+'Dheli Karatia', null, 'Karatia-1903', 'Tangail', 'Tangail', '1672183057',
+130558, 5.00, 4.88, 2010,'Science',1,
+134444, 5.00, 5.00, 2012,'Science',2);
+
