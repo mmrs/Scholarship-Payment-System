@@ -3,59 +3,53 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Log In</title>
-<!--    <link rel="stylesheet" href="resource/bootstrap.min.css">-->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Login</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-<br><br>
-<div class="row col-md-8 justify-content-center">
-    <div class="panel panel-default">
-        <br><br>
-        <div class="panel-body">
-            <h2 class = "text-center">Scholarship Payment System</h2>
-            <form class="form-horizontal" role="form" method="POST" th:object="${login}" action="/login">
-                <div class="text-center" style="padding: 30px">
-                    <img th:src="@{/DBBL-Logo-1.png}" alt="Logo" height="12%" width="12%">
-                </div>
-                <div class="container " style = "margin-bottom:10px;">
-                    <label for="login_name" class="col-md-2 control-label">User Name</label>
-                    <div class="col-md-4">
-                        <input id="userName" type="text" class="form-control" name="userName" th:value="${login.userName}" required autofocus>
+<div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+        <div class="container center col s12">
+            <div class="text-center">
+                <img th:src="@{/DBBL-Logo-1.png}" alt="Logo" height="15%" width="15%">
+            </div>
+            <h1 class="header center teal-text text-lighten-2">Scholarship Payment System</h1>
+            <form class="center" role="form" method="POST" th:object="${loginUser}" action="/login">
+                <div class="row">
+                    <div class="input-field col s4 offset-s4">
+                        <input id="userName" type="text" name="userName" th:value="${loginUser.userName}" required
+                               autofocus>
+                        <label class="active" for="userName">User Name</label>
                     </div>
                 </div>
-                <div class="container">
-                    <label for="password" class="col-md-2 control-label">Password</label>
-                    <div class="col-md-4">
-                        <input id="password" type="password" class="form-control" name="password" th:value="${login.password}" required>
+                <div class="row">
+                    <div class="input-field col s4 offset-s4">
+                        <input id="password" name="password" type="password" th:value="${loginUser.password}" required>
+                        <label class="active" for="userName">Password</label>
                     </div>
                 </div>
+                <div class="row">
+                    <label><span style="text-color:red !important;font-weight: bold"> Wrong user or password</span></label>
 
-<!--                <div class="form-group">-->
-<!--                    <div class = "col-md-5 col-md-offset-3" style = "color:red; font-weight: bold"><%=error%></div>-->
-<!--                </div>-->
-
-                <div class="form-group">
-                    <div class="col-md-1 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">
-                            Login
-                        </button>
-                    </div>
-                    <label class="col-md-1 text-center" style="padding-right:0"> OR </label>
-                    <a class="btn btn-link" href="signup.jsp"  style="padding:0">
-                        Sign Up Here
-                    </a>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-large">Login</button>
+                </div>
+                <div class="row">
+                    <label class="col-md-1 text-center"> OR </label>
+                </div>
+                <div class="row">
+                    <a href="/register">Register for Scholarship</a></li>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
