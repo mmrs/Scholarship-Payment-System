@@ -26,13 +26,48 @@ public class Students {
     private String sscGpaWithoutFourthSubject;
     private String sscExamYear;
     private String sscStudyGroup;
-    private String sscInstitutionId;
+    private String sscInstitutionName;
+
+    public String getSscInstitutionName() {
+        return sscInstitutionName;
+    }
+
+    public void setSscInstitutionName(String sscInstitutionName) {
+        this.sscInstitutionName = sscInstitutionName;
+    }
+
+    public String getSscBoard() {
+        return sscBoard;
+    }
+
+    public void setSscBoard(String sscBoard) {
+        this.sscBoard = sscBoard;
+    }
+
+    public String getHscInstitutionName() {
+        return hscInstitutionName;
+    }
+
+    public void setHscInstitutionName(String hscInstitutionName) {
+        this.hscInstitutionName = hscInstitutionName;
+    }
+
+    public String getHscBoard() {
+        return hscBoard;
+    }
+
+    public void setHscBoard(String hscBoard) {
+        this.hscBoard = hscBoard;
+    }
+
+    private String sscBoard;
     private String hscRoll;
     private String hscGpaWithFourthSubject;
     private String hscGpaWithoutFourthSubject;
     private String hscExamYear;
     private String hscStudyGroup;
-    private String hscInstitutionId;
+    private String hscInstitutionName;
+    private String hscBoard;
 
     public Integer getId() {
         return id;
@@ -178,14 +213,6 @@ public class Students {
         this.sscStudyGroup = sscStudyGroup;
     }
 
-    public String getSscInstitutionId() {
-        return sscInstitutionId;
-    }
-
-    public void setSscInstitutionId(String sscInstitutionId) {
-        this.sscInstitutionId = sscInstitutionId;
-    }
-
     public String getHscRoll() {
         return hscRoll;
     }
@@ -226,19 +253,11 @@ public class Students {
         this.hscStudyGroup = hscStudyGroup;
     }
 
-    public String getHscInstitutionId() {
-        return hscInstitutionId;
-    }
-
-    public void setHscInstitutionId(String hscInstitutionId) {
-        this.hscInstitutionId = hscInstitutionId;
-    }
-
     @Override
     public String toString() {
         return "Students{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
+                "id=" + id +
+                ", userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", fatherName='" + fatherName + '\'' +
@@ -255,13 +274,15 @@ public class Students {
                 ", sscGpaWithoutFourthSubject='" + sscGpaWithoutFourthSubject + '\'' +
                 ", sscExamYear='" + sscExamYear + '\'' +
                 ", sscStudyGroup='" + sscStudyGroup + '\'' +
-                ", sscInstitutionId='" + sscInstitutionId + '\'' +
+                ", sscInstitutionName='" + sscInstitutionName + '\'' +
+                ", sscBoard='" + sscBoard + '\'' +
                 ", hscRoll='" + hscRoll + '\'' +
                 ", hscGpaWithFourthSubject='" + hscGpaWithFourthSubject + '\'' +
                 ", hscGpaWithoutFourthSubject='" + hscGpaWithoutFourthSubject + '\'' +
                 ", hscExamYear='" + hscExamYear + '\'' +
                 ", hscStudyGroup='" + hscStudyGroup + '\'' +
-                ", hscInstitutionId='" + hscInstitutionId + '\'' +
+                ", hscInstitutionName='" + hscInstitutionName + '\'' +
+                ", hscBoard='" + hscBoard + '\'' +
                 '}';
     }
 }

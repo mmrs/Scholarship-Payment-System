@@ -45,7 +45,10 @@ public class UserController {
         if (dbUser == null) {
             return "redirect:/login?error=" + "Wrong Username or Password";
         } else {
-            return "redirect:/register?userId=" + dbUser.getId();
+            if(dbUser.getUserName().equals("admin")){
+                return "admin";
+            }
+            return "redirect:/register?userId=" + dbUser.getId() + "&user=edit";
         }
     }
 

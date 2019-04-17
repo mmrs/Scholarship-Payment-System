@@ -18,19 +18,19 @@
             <h3 class="header center teal-text text-lighten-2">Student Registration</h3>
             <form class="center" role="form" id="register-from" method="POST" th:object="${RegisterUser}"
                   action="/register">
+                <h6 class="color-red-bold" id="message"></h6>
                 <div class="row">
                     <div class="input-field col s4 offset-s2">
-                        <input id="userName" type="text" name="userName" th:value="${RegisterUser.users.userName}"
-                               required
-                               autofocus>
+                        <input id="userName" type="text" name="userName" th:value="${RegisterUser.users.userName}" required autofocus>
                         <label class="active" for="userName">User Name</label>
                     </div>
                     <div class="input-field col s4">
-                        <input id="password" name="password" type="password" th:value="${RegisterUser.users.password}"
-                               required>
-                        <label class="active" for="userName">Password</label>
+                        <input id="password" name="password" type="password" th:value="${RegisterUser.users.password}" required>
+                        <label class="active" for="password">Password</label>
                     </div>
                 </div>
+
+
                 <div class="row">
                     <div class="input-field col s3 offset-s2">
                         <input id="firstName" type="text" name="firstName" th:value="${RegisterUser.students.firstName}"
@@ -41,27 +41,139 @@
                         <input id="lastName" name="lastName" type="text" th:value="${RegisterUser.students.lastName}">
                         <label class="active" for="lastName">Last Name</label>
                     </div>
-                    <div class="input-field col s2">
-                        <label class="">Gender</label>
-                        <select>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-
+                    <label class="active">Gender</label>
+                    <p>
+                        <label class="input-field">
+                            <input id="gender" class="with-gap input-field" name="gender" type="radio"
+                                   checked/>
+                            <span>Male</span>
+                        </label>
+                        <label>
+                            <input class="with-gap" name="gender" type="radio"/>
+                            <span>Female</span>
+                        </label>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4 offset-s2">
+                        <input id="village" type="text" name="village"
+                               th:value="${RegisterUser.students.village}">
+                        <label class="active" for="village">Village</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="road" name="road" type="text"
+                               th:value="${RegisterUser.students.road}">
+                        <label class="active" for="road">Road</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4 offset-s2">
-                        <input id="fatherName" type="text" name="fatherName"
-                               th:value="${RegisterUser.students.fatherName}" required>
-                        <label class="active" for="fatherName">Father Name</label>
+                        <input id="postOffice" type="text" name="postOffice"
+                               th:value="${RegisterUser.students.postOffice}">
+                        <label class="active" for="postOffice">Post Office</label>
                     </div>
                     <div class="input-field col s4">
-                        <input id="motherName" name="motherName" type="text"
-                               th:value="${RegisterUser.students.motherName}" required>
-                        <label class="active" for="motherName">Mother Name</label>
+                        <input id="thana" name="thana" type="text"
+                               th:value="${RegisterUser.students.thana}">
+                        <label class="active" for="thana">Thana</label>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="input-field col s4 offset-s2">
+                        <input id="district" type="text" name="district"
+                               th:value="${RegisterUser.students.district}">
+                        <label class="active" for="district">District</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="phone" name="phone" type="text"
+                               th:value="${RegisterUser.students.phone}">
+                        <label class="active" for="phone">Phone</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s3 offset-s2">
+                        <input id="sscRoll" type="text" name="sscRoll"
+                               th:value="${RegisterUser.students.sscRoll}">
+                        <label class="active" for="sscRoll">SSC Roll</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="sscGpaWithFourthSubject" name="sscGpaWithFourthSubject" type="number"
+                               th:value="${RegisterUser.students.sscGpaWithFourthSubject}">
+                        <label class="active" for="sscGpaWithFourthSubject">SSC GPA(with 4th Subject)</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="sscGpaWithoutFourthSubject" name="sscGpaWithoutFourthSubject" type="number"
+                               th:value="${RegisterUser.students.sscGpaWithoutFourthSubject}">
+                        <label class="active" for="sscGpaWithoutFourthSubject">SSC GPA(without 4th Subject)</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4 offset-s2">
+                        <input id="sscExamYear" type="text" name="sscExamYear"
+                               th:value="${RegisterUser.students.sscExamYear}">
+                        <label class="active" for="sscExamYear">SSC Exam Year</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="sscStudyGroup" name="sscStudyGroup" type="text"
+                               th:value="${RegisterUser.students.sscStudyGroup}">
+                        <label class="active" for="sscStudyGroup">SSC Study Group</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s7 offset-s2">
+                        <input id="sscInstitutionName" type="text" name="sscInstitutionName"
+                               th:value="${RegisterUser.students.sscInstitutionName}">
+                        <label class="active" for="sscInstitutionName">SSC Institution Name</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input id="sscBoard" type="text" name="sscBoard"
+                               th:value="${RegisterUser.students.sscBoard}">
+                        <label class="active" for="sscBoard">SSC Board</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s3 offset-s2">
+                        <input id="hscRoll" type="text" name="hscRoll"
+                               th:value="${RegisterUser.students.hscRoll}">
+                        <label class="active" for="hscRoll">HSC Roll</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="hscGpaWithFourthSubject" name="hscGpaWithFourthSubject" type="number"
+                               th:value="${RegisterUser.students.hscGpaWithFourthSubject}">
+                        <label class="active" for="hscGpaWithFourthSubject">HSC GPA(with 4th Subject)</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="hscGpaWithoutFourthSubject" name="hscGpaWithoutFourthSubject" type="number"
+                               th:value="${RegisterUser.students.hscGpaWithoutFourthSubject}">
+                        <label class="active" for="hscGpaWithoutFourthSubject">HSC GPA(without 4th Subject)</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4 offset-s2">
+                        <input id="hscExamYear" type="text" name="hscExamYear"
+                               th:value="${RegisterUser.students.hscExamYear}">
+                        <label class="active" for="hscExamYear">HSC Exam Year</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="hscStudyGroup" name="hscStudyGroup" type="text"
+                               th:value="${RegisterUser.students.hscStudyGroup}">
+                        <label class="active" for="hscStudyGroup">HSC Study Group</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s7 offset-s2">
+                        <input id="hscInstitutionName" type="text" name="hscInstitutionName"
+                               th:value="${RegisterUser.students.hscInstitutionName}">
+                        <label class="active" for="hscInstitutionName">HSC Institution Name</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input id="hscBoard" type="text" name="hscBoard"
+                               th:value="${RegisterUser.students.hscBoard}">
+                        <label class="active" for="hscBoard">HSC Board</label>
+                    </div>
+                </div>
+
                 <div class="row">
                     <button type="submit" class="btn btn-large">Save Information</button>
                 </div>
@@ -77,6 +189,7 @@
 </div>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
     // document.addEventListener('DOMContentLoaded', function() {
     //     var elems = document.querySelectorAll('select');
@@ -91,7 +204,11 @@
         var url = new URL(url_string);
         var msg = url.searchParams.get("error");
         if (msg) {
-            alert(msg);
+            $('#message').text(msg);
+        }
+        var isUpdate = url.searchParams.get("user") === "edit";
+        if (isUpdate) {
+            $('#userName').attr('readonly', true);
         }
     });
 </script>
