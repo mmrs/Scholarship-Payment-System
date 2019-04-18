@@ -15,21 +15,23 @@
 <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
         <div class="container center col s12">
-            <h3 class="header center teal-text text-lighten-2">Student Registration</h3>
+            <h3 class="header center teal-text text-lighten-2">Student Information</h3>
             <form class="center" role="form" id="register-from" method="POST" th:object="${RegisterUser}"
-                  action="/register">
+                 action="/register">
+                <input type="hidden" th:value="${RegisterUser.students.id}" name="id"/>
                 <h6 class="color-red-bold" id="message"></h6>
                 <div class="row">
                     <div class="input-field col s4 offset-s2">
-                        <input id="userName" type="text" name="userName" th:value="${RegisterUser.users.userName}" required autofocus>
+                        <input id="userName" type="text" name="userName" th:value="${RegisterUser.users.userName}"
+                               required autofocus>
                         <label class="active" for="userName">User Name</label>
                     </div>
                     <div class="input-field col s4">
-                        <input id="password" name="password" type="password" th:value="${RegisterUser.users.password}" required>
+                        <input id="password" name="password" type="password" th:value="${RegisterUser.users.password}"
+                               required>
                         <label class="active" for="password">Password</label>
                     </div>
                 </div>
-
 
                 <div class="row">
                     <div class="input-field col s3 offset-s2">
@@ -45,14 +47,26 @@
                     <p>
                         <label class="input-field">
                             <input id="gender" class="with-gap input-field" name="gender" type="radio"
-                                   checked/>
+                                   value="Male"/>
                             <span>Male</span>
                         </label>
                         <label>
-                            <input class="with-gap" name="gender" type="radio"/>
+                            <input class="with-gap" name="gender" type="radio" value="Female"/>
                             <span>Female</span>
                         </label>
                     </p>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4 offset-s2">
+                        <input id="fatherName" type="text" name="fatherName"
+                               th:value="${RegisterUser.students.fatherName}" required>
+                        <label class="active" for="fatherName">Father's Name</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="motherName" name="motherName" type="text"
+                               th:value="${RegisterUser.students.motherName}" required>
+                        <label class="active" for="motherName">Mother's Name</label>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4 offset-s2">
@@ -69,148 +83,145 @@
                 <div class="row">
                     <div class="input-field col s4 offset-s2">
                         <input id="postOffice" type="text" name="postOffice"
-                               th:value="${RegisterUser.students.postOffice}">
+                               th:value="${RegisterUser.students.postOffice}" required>
                         <label class="active" for="postOffice">Post Office</label>
                     </div>
                     <div class="input-field col s4">
                         <input id="thana" name="thana" type="text"
-                               th:value="${RegisterUser.students.thana}">
+                               th:value="${RegisterUser.students.thana}" required>
                         <label class="active" for="thana">Thana</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4 offset-s2">
                         <input id="district" type="text" name="district"
-                               th:value="${RegisterUser.students.district}">
+                               th:value="${RegisterUser.students.district}" required>
                         <label class="active" for="district">District</label>
                     </div>
                     <div class="input-field col s4">
                         <input id="phone" name="phone" type="text"
-                               th:value="${RegisterUser.students.phone}">
+                               th:value="${RegisterUser.students.phone}" required>
                         <label class="active" for="phone">Phone</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s3 offset-s2">
                         <input id="sscRoll" type="text" name="sscRoll"
-                               th:value="${RegisterUser.students.sscRoll}">
+                               th:value="${RegisterUser.students.sscRoll}" required>
                         <label class="active" for="sscRoll">SSC Roll</label>
                     </div>
                     <div class="input-field col s3">
                         <input id="sscGpaWithFourthSubject" name="sscGpaWithFourthSubject" type="number"
-                               th:value="${RegisterUser.students.sscGpaWithFourthSubject}">
+                               th:value="${RegisterUser.students.sscGpaWithFourthSubject}" required>
                         <label class="active" for="sscGpaWithFourthSubject">SSC GPA(with 4th Subject)</label>
                     </div>
                     <div class="input-field col s3">
                         <input id="sscGpaWithoutFourthSubject" name="sscGpaWithoutFourthSubject" type="number"
-                               th:value="${RegisterUser.students.sscGpaWithoutFourthSubject}">
+                               th:value="${RegisterUser.students.sscGpaWithoutFourthSubject}" required>
                         <label class="active" for="sscGpaWithoutFourthSubject">SSC GPA(without 4th Subject)</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4 offset-s2">
                         <input id="sscExamYear" type="text" name="sscExamYear"
-                               th:value="${RegisterUser.students.sscExamYear}">
+                               th:value="${RegisterUser.students.sscExamYear}" required>
                         <label class="active" for="sscExamYear">SSC Exam Year</label>
                     </div>
                     <div class="input-field col s4">
                         <input id="sscStudyGroup" name="sscStudyGroup" type="text"
-                               th:value="${RegisterUser.students.sscStudyGroup}">
+                               th:value="${RegisterUser.students.sscStudyGroup}" required>
                         <label class="active" for="sscStudyGroup">SSC Study Group</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s7 offset-s2">
                         <input id="sscInstitutionName" type="text" name="sscInstitutionName"
-                               th:value="${RegisterUser.students.sscInstitutionName}">
+                               th:value="${RegisterUser.students.sscInstitutionName}" required>
                         <label class="active" for="sscInstitutionName">SSC Institution Name</label>
                     </div>
                     <div class="input-field col s2">
                         <input id="sscBoard" type="text" name="sscBoard"
-                               th:value="${RegisterUser.students.sscBoard}">
+                               th:value="${RegisterUser.students.sscBoard}" required>
                         <label class="active" for="sscBoard">SSC Board</label>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="input-field col s3 offset-s2">
                         <input id="hscRoll" type="text" name="hscRoll"
-                               th:value="${RegisterUser.students.hscRoll}">
+                               th:value="${RegisterUser.students.hscRoll}" required>
                         <label class="active" for="hscRoll">HSC Roll</label>
                     </div>
                     <div class="input-field col s3">
                         <input id="hscGpaWithFourthSubject" name="hscGpaWithFourthSubject" type="number"
-                               th:value="${RegisterUser.students.hscGpaWithFourthSubject}">
+                               th:value="${RegisterUser.students.hscGpaWithFourthSubject}" required>
                         <label class="active" for="hscGpaWithFourthSubject">HSC GPA(with 4th Subject)</label>
                     </div>
                     <div class="input-field col s3">
                         <input id="hscGpaWithoutFourthSubject" name="hscGpaWithoutFourthSubject" type="number"
-                               th:value="${RegisterUser.students.hscGpaWithoutFourthSubject}">
+                               th:value="${RegisterUser.students.hscGpaWithoutFourthSubject}" required>
                         <label class="active" for="hscGpaWithoutFourthSubject">HSC GPA(without 4th Subject)</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4 offset-s2">
                         <input id="hscExamYear" type="text" name="hscExamYear"
-                               th:value="${RegisterUser.students.hscExamYear}">
+                               th:value="${RegisterUser.students.hscExamYear}" required>
                         <label class="active" for="hscExamYear">HSC Exam Year</label>
                     </div>
                     <div class="input-field col s4">
                         <input id="hscStudyGroup" name="hscStudyGroup" type="text"
-                               th:value="${RegisterUser.students.hscStudyGroup}">
+                               th:value="${RegisterUser.students.hscStudyGroup}" required>
                         <label class="active" for="hscStudyGroup">HSC Study Group</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s7 offset-s2">
                         <input id="hscInstitutionName" type="text" name="hscInstitutionName"
-                               th:value="${RegisterUser.students.hscInstitutionName}">
+                               th:value="${RegisterUser.students.hscInstitutionName}" required>
                         <label class="active" for="hscInstitutionName">HSC Institution Name</label>
                     </div>
                     <div class="input-field col s2">
                         <input id="hscBoard" type="text" name="hscBoard"
-                               th:value="${RegisterUser.students.hscBoard}">
+                               th:value="${RegisterUser.students.hscBoard}" required>
                         <label class="active" for="hscBoard">HSC Board</label>
                     </div>
                 </div>
-
-                <div class="row">
-                    <button type="submit" class="btn btn-large">Save Information</button>
+                <div id="admin-section">
+                    <div class="row">
+                        <button type="submit" class="btn btn-large">Save Information</button>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-1 text-center"> Already Registered? </label>
+                    </div>
+                    <div class="row">
+                        <a href="/login">Login Here</a></li>
+                    </div>
                 </div>
             </form>
-            <div class="row">
-                <label class="col-md-1 text-center"> Already Registered? </label>
-            </div>
-            <div class="row">
-                <a href="/login">Login Here</a></li>
-            </div>
         </div>
     </div>
-</div>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     var elems = document.querySelectorAll('select');
-    //     var instances = M.FormSelect.init(elems, options);
-    // });
-
-    // Or with jQuery
-
-    $(document).ready(function () {
-        // $('select').formSelect();
-        var url_string = window.location;
-        var url = new URL(url_string);
-        var msg = url.searchParams.get("error");
-        if (msg) {
-            $('#message').text(msg);
-        }
-        var isUpdate = url.searchParams.get("user") === "edit";
-        if (isUpdate) {
-            $('#userName').attr('readonly', true);
-        }
-    });
-</script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // $('select').formSelect();
+            var url_string = window.location;
+            var url = new URL(url_string);
+            var msg = url.searchParams.get("error");
+            if (msg) {
+                $('#message').text(msg);
+            }
+            var isUpdate = url.searchParams.get("user") === "edit";
+            if (isUpdate) {
+                $('#userName').attr('readonly', true);
+            }
+            var isAdmin = url.searchParams.get("ust") === "a";
+            if (isAdmin) {
+                $('input').attr('readonly', true);
+                $('#admin-section').hide();
+            }
+        });
+    </script>
 </body>
 </html>

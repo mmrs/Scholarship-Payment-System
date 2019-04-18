@@ -45,8 +45,8 @@ public class UserController {
         if (dbUser == null) {
             return "redirect:/login?error=" + "Wrong Username or Password";
         } else {
-            if(dbUser.getUserName().equals("admin")){
-                return "admin";
+            if(dbUser.getUserType().equals("a")){
+                return "redirect:/studentList";
             }
             return "redirect:/register?userId=" + dbUser.getId() + "&user=edit";
         }
@@ -80,7 +80,10 @@ public class UserController {
         Users dbUser = usersRepository.findByUserName(users.getUserName());
         if (dbUser != null) {
             if(dbUser.getPassword().equals(users.getPassword())){
-                //save updates
+//                users.setId(dbUser.getId());
+//                usersRepository.save(users);
+                students.setUserId(dbUser.getId());
+                studentsRepository.save(students);
                 return "redirect:/success?message=Information updated successfully.";
             }
             registerUser.setUsers(users);
@@ -88,6 +91,7 @@ public class UserController {
             return "redirect:/register?error=" + "User already registered";
         }
         users.setId(usersRepository.getMaxId() + 1);
+        users.setUserType("s");
         registerUser.setUsers(users);
         students.setId(studentsRepository.getMaxId() + 1);
         students.setUserId(users.getId());
@@ -105,5 +109,11 @@ public class UserController {
     public String success(Model model, String message) {
         model.addAttribute("message", message);
         return "success";
+    }
+
+    @GetMapping("/studentList")
+    public String studentList(Model model){
+        model.addAttribute("students", studentsRepository.findAll());
+        return "studentList";
     }
 }

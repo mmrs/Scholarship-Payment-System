@@ -1,0 +1,67 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Student List</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+<nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+        <img id="logo-container" src="/DBBL-Logo-1.png" class="brand-logo" height="60px" width="100px"/>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/scholarship/generate">Generate Selected List</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="sidenav">
+            <li><a href="/scholarship/generate">Generate Selected List</a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+
+<div class="table-responsive container center col s12">
+    <table class="display table table-bordered table-striped table-responsive" id="mytable">
+        <thead>
+        <tr>
+            <th class="success">Name</th>
+            <th class="success">SSC Passing Year</th>
+            <th class="success">HSC Passing Year</th>
+            <th class="success">ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td><span th:text="${student.firstName +' ' + student.lastName}"> Student Name </span></td>
+            <td><span th:text="${student.sscExamYear}"> SSC Passing Year </span></td>
+            <td><span th:text="${student.hscExamYear}"> HSC Passing Year </span></td>
+            <td>
+                <a class="btn btn-danger btn-block"
+                   th:href="@{'/register?userId=' + ${student.userId} + '&ust=a'}">View</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#mytable').dataTable({
+            // stateSave: true
+        });
+    });
+</script>
+</body>
