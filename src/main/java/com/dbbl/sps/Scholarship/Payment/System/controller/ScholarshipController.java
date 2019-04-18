@@ -1,13 +1,12 @@
 package com.dbbl.sps.Scholarship.Payment.System.controller;
 
-import com.dbbl.sps.Scholarship.Payment.System.model.EligibileStudents;
+import com.dbbl.sps.Scholarship.Payment.System.model.EligibleStudents;
 import com.dbbl.sps.Scholarship.Payment.System.model.Students;
 import com.dbbl.sps.Scholarship.Payment.System.repository.EligibleStudentsRepository;
 import com.dbbl.sps.Scholarship.Payment.System.repository.StudentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -58,8 +57,10 @@ public class ScholarshipController {
             System.out.println(selectedStudents);
         }
 
+        eligibleStudentsRepository.deleteAll();
         for(int i=0;i<selectedStudents.size();i++){
-         eligibleStudentsRepository.save(new EligibileStudents(i+1, selectedStudents.get(i).getId()));
+            EligibleStudents newItem = new EligibleStudents(i+1, selectedStudents.get(i).getId());
+            eligibleStudentsRepository.save(newItem);
         }
 
         return selectedStudents;

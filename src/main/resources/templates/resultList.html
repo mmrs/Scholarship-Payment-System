@@ -17,31 +17,28 @@
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
         <img id="logo-container" src="/DBBL-Logo-1.png" class="brand-logo" height="60px" width="100px"/>
-        <ul class="right hide-on-med-and-down">
-            <button class="btn btn-large" onclick="generateClicked()">Generate Selected List</button>
-        </ul>
     </div>
 </nav>
 
 <div class="table-responsive container center col s12">
+    <h3>SELECTED STUDENTS FOR SCHOLARSHIP</h3>
     <table class="display table table-bordered table-striped table-responsive" id="mytable">
         <thead>
         <tr>
             <th class="success">Name</th>
+            <th class="success">SSC Roll</th>
             <th class="success">SSC Passing Year</th>
+            <th class="success">HSC Roll</th>
             <th class="success">HSC Passing Year</th>
-            <th class="success">ACTION</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="student : ${students}">
-            <td><span th:text="${student.firstName +' ' + student.lastName}"> Student Name </span></td>
+            <td><span th:text="${student.firstName +' ' + student.lastName}"> Name </span></td>
+            <td><span th:text="${student.sscRoll}"> SSC Roll </span></td>
             <td><span th:text="${student.sscExamYear}"> SSC Passing Year </span></td>
+            <td><span th:text="${student.hscRoll}"> HSC Roll </span></td>
             <td><span th:text="${student.hscExamYear}"> HSC Passing Year </span></td>
-            <td>
-                <a class="btn btn-danger btn-block"
-                   th:href="@{'/register?userId=' + ${student.userId} + '&ust=a'}">View</a>
-            </td>
         </tr>
         </tbody>
     </table>
@@ -56,16 +53,5 @@
             // stateSave: true
         });
     });
-
-    function generateClicked() {
-        $.ajax({
-          url:'/scholarship/generate',
-          success: function(){
-              alert('Result Generated');
-              window.location = '/result';
-          }
-        });
-    }
-
 </script>
 </body>

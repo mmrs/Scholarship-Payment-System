@@ -186,10 +186,10 @@
                         <label class="active" for="hscBoard">HSC Board</label>
                     </div>
                 </div>
+                <div class="row">
+                    <button id="save-button" type="submit" class="btn btn-large">Save Information</button>
+                </div>
                 <div id="admin-section">
-                    <div class="row">
-                        <button type="submit" class="btn btn-large">Save Information</button>
-                    </div>
                     <div class="row">
                         <label class="col-md-1 text-center"> Already Registered? </label>
                     </div>
@@ -202,7 +202,6 @@
     </div>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
             // $('select').formSelect();
@@ -215,11 +214,13 @@
             var isUpdate = url.searchParams.get("user") === "edit";
             if (isUpdate) {
                 $('#userName').attr('readonly', true);
+                $('#admin-section').hide();
             }
             var isAdmin = url.searchParams.get("ust") === "a";
             if (isAdmin) {
                 $('input').attr('readonly', true);
                 $('#admin-section').hide();
+                $('#save-button').hide();
             }
         });
     </script>

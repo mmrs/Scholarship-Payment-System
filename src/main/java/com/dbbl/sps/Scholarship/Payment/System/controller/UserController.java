@@ -1,9 +1,11 @@
 package com.dbbl.sps.Scholarship.Payment.System.controller;
 
 
+import com.dbbl.sps.Scholarship.Payment.System.model.EligibleStudents;
 import com.dbbl.sps.Scholarship.Payment.System.model.RegisterUser;
 import com.dbbl.sps.Scholarship.Payment.System.model.Students;
 import com.dbbl.sps.Scholarship.Payment.System.model.Users;
+import com.dbbl.sps.Scholarship.Payment.System.repository.EligibleStudentsRepository;
 import com.dbbl.sps.Scholarship.Payment.System.repository.StudentsRepository;
 import com.dbbl.sps.Scholarship.Payment.System.repository.UsersRepository;
 import org.apache.catalina.User;
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -26,6 +30,8 @@ public class UserController {
     UsersRepository usersRepository;
     @Autowired
     StudentsRepository studentsRepository;
+    @Autowired
+    EligibleStudentsRepository eligibleStudentsRepository;
 
     @GetMapping("/")
     public String index() {
@@ -45,8 +51,13 @@ public class UserController {
         if (dbUser == null) {
             return "redirect:/login?error=" + "Wrong Username or Password";
         } else {
-            if(dbUser.getUserType().equals("a")){
+            if (dbUser.getUserType().equals("a")) {
                 return "redirect:/studentList";
+            }
+            else{
+                if(eligibleStudentsRepository.findAll().size() > 0){
+                    return "redirect:/result";
+                }
             }
             return "redirect:/register?userId=" + dbUser.getId() + "&user=edit";
         }
@@ -54,16 +65,16 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model, String userId) {
-        RegisterUser  registerUser= new RegisterUser();
-        if(!model.containsAttribute("RegisterUser")){
+        RegisterUser registerUser = new RegisterUser();
+        if (!model.containsAttribute("RegisterUser")) {
             registerUser.setUsers(new Users());
             registerUser.setStudents(new Students());
             model.addAttribute("RegisterUser", registerUser);
         }
-        if(userId != null && !userId.isEmpty()){
+        if (userId != null && !userId.isEmpty()) {
             Integer id = Integer.parseInt(userId);
             Optional<Users> users = usersRepository.findById(id);
-            if(users.isPresent()){
+            if (users.isPresent()) {
                 registerUser.setUsers(users.get());
                 Students students = studentsRepository.findByUserId(users.get().getId());
                 registerUser.setStudents(students);
@@ -79,7 +90,7 @@ public class UserController {
         model.addAttribute("RegisterUser", registerUser);
         Users dbUser = usersRepository.findByUserName(users.getUserName());
         if (dbUser != null) {
-            if(dbUser.getPassword().equals(users.getPassword())){
+            if (dbUser.getPassword().equals(users.getPassword())) {
 //                users.setId(dbUser.getId());
 //                usersRepository.save(users);
                 students.setUserId(dbUser.getId());
@@ -112,8 +123,24 @@ public class UserController {
     }
 
     @GetMapping("/studentList")
-    public String studentList(Model model){
+    public String studentList(Model model) {
         model.addAttribute("students", studentsRepository.findAll());
         return "studentList";
+    }
+
+    @GetMapping("/result")
+    public String Result(Model model) {
+
+        List<EligibleStudents> eligibleStudentsList = eligibleStudentsRepository.findAll();
+        List<Students> studentsList = new ArrayList<Students>();
+        for (int i = 0; i < eligibleStudentsList.size(); i++) {
+            Optional<Students> students = studentsRepository.findById(eligibleStudentsList.get(i).getStudentId());
+            if (students.isPresent()) {
+                studentsList.add(students.get());
+            }
+        }
+
+        model.addAttribute("students", studentsList);
+        return "resultList";
     }
 }
