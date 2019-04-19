@@ -1,25 +1,17 @@
 package com.dbbl.sps.Scholarship.Payment.System.controller;
 
 
-import com.dbbl.sps.Scholarship.Payment.System.model.EligibleStudents;
 import com.dbbl.sps.Scholarship.Payment.System.model.RegisterUser;
 import com.dbbl.sps.Scholarship.Payment.System.model.Students;
 import com.dbbl.sps.Scholarship.Payment.System.model.Users;
-import com.dbbl.sps.Scholarship.Payment.System.repository.EligibleStudentsRepository;
-import com.dbbl.sps.Scholarship.Payment.System.repository.StudentsRepository;
-import com.dbbl.sps.Scholarship.Payment.System.repository.UsersRepository;
-import org.apache.catalina.User;
+import com.dbbl.sps.Scholarship.Payment.System.service.ScholarshipService;
+import com.dbbl.sps.Scholarship.Payment.System.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,11 +19,9 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    UsersRepository usersRepository;
+    UserService userService;
     @Autowired
-    StudentsRepository studentsRepository;
-    @Autowired
-    EligibleStudentsRepository eligibleStudentsRepository;
+    ScholarshipService scholarshipService;
 
     @GetMapping("/")
     public String index() {
@@ -46,16 +36,14 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginUser(Model model, Users users) {
-        System.out.println(usersRepository.findByUserNameAndPassword(users.getUserName(), users.getPassword()));
-        Users dbUser = usersRepository.findByUserNameAndPassword(users.getUserName(), users.getPassword());
+        Users dbUser = userService.getUserAgainstPassword(users);
         if (dbUser == null) {
             return "redirect:/login?error=" + "Wrong Username or Password";
         } else {
             if (dbUser.getUserType().equals("a")) {
                 return "redirect:/studentList";
-            }
-            else{
-                if(eligibleStudentsRepository.findAll().size() > 0){
+            } else {
+                if (scholarshipService.resultGenerate()) {
                     return "redirect:/result";
                 }
             }
@@ -72,11 +60,11 @@ public class UserController {
             model.addAttribute("RegisterUser", registerUser);
         }
         if (userId != null && !userId.isEmpty()) {
-            Integer id = Integer.parseInt(userId);
-            Optional<Users> users = usersRepository.findById(id);
+
+            Optional<Users> users = userService.getUserById(userId);
             if (users.isPresent()) {
                 registerUser.setUsers(users.get());
-                Students students = studentsRepository.findByUserId(users.get().getId());
+                Students students = userService.getStudentByUserId(users.get().getId());
                 registerUser.setStudents(students);
                 model.addAttribute("RegisterUser", registerUser);
             }
@@ -88,30 +76,30 @@ public class UserController {
     public String register(Model model, Users users, Students students) {
         RegisterUser registerUser = new RegisterUser();
         model.addAttribute("RegisterUser", registerUser);
-        Users dbUser = usersRepository.findByUserName(users.getUserName());
+        Users dbUser = userService.findByUserName(users.getUserName());
         if (dbUser != null) {
             if (dbUser.getPassword().equals(users.getPassword())) {
 //                users.setId(dbUser.getId());
 //                usersRepository.save(users);
                 students.setUserId(dbUser.getId());
-                Students current = studentsRepository.findByUserId(students.getUserId());
+                Students current = userService.getStudentByUserId(students.getUserId());
                 students.setGender(current.getGender());
-                studentsRepository.save(students);
+                userService.saveStudent(students);
                 return "redirect:/success?message=Information updated successfully.";
             }
             registerUser.setUsers(users);
             registerUser.setStudents(students);
             return "redirect:/register?error=" + "User already registered";
         }
-        users.setId(usersRepository.getMaxId() + 1);
+        users.setId(userService.getMaxUserId() + 1);
         users.setUserType("s");
         registerUser.setUsers(users);
-        students.setId(studentsRepository.getMaxId() + 1);
+        students.setId(userService.GetMaxStudentId() + 1);
         students.setUserId(users.getId());
         registerUser.setStudents(students);
         try {
-            usersRepository.save(users);
-            studentsRepository.save(students);
+            userService.saveUser(users);
+            userService.saveStudent(students);
         } catch (Exception ex) {
             return "redirect:/register?error=" + ex.getMessage();
         }
@@ -126,22 +114,14 @@ public class UserController {
 
     @GetMapping("/studentList")
     public String studentList(Model model) {
-        model.addAttribute("students", studentsRepository.findAll());
+        model.addAttribute("students", userService.getAllStudents());
         return "studentList";
     }
 
     @GetMapping("/result")
     public String Result(Model model) {
 
-        List<EligibleStudents> eligibleStudentsList = eligibleStudentsRepository.findAll();
-        List<Students> studentsList = new ArrayList<Students>();
-        for (int i = 0; i < eligibleStudentsList.size(); i++) {
-            Optional<Students> students = studentsRepository.findById(eligibleStudentsList.get(i).getStudentId());
-            if (students.isPresent()) {
-                studentsList.add(students.get());
-            }
-        }
-
+        List<Students> studentsList = scholarshipService.getEligibleStudents();
         model.addAttribute("students", studentsList);
         return "resultList";
     }

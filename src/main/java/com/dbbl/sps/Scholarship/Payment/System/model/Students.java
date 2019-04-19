@@ -27,6 +27,14 @@ public class Students {
     private String sscExamYear;
     private String sscStudyGroup;
     private String sscInstitutionName;
+    private String sscBoard;
+    private String hscRoll;
+    private String hscGpaWithFourthSubject;
+    private String hscGpaWithoutFourthSubject;
+    private String hscExamYear;
+    private String hscStudyGroup;
+    private String hscInstitutionName;
+    private String hscBoard;
 
     public String getSscInstitutionName() {
         return sscInstitutionName;
@@ -59,15 +67,6 @@ public class Students {
     public void setHscBoard(String hscBoard) {
         this.hscBoard = hscBoard;
     }
-
-    private String sscBoard;
-    private String hscRoll;
-    private String hscGpaWithFourthSubject;
-    private String hscGpaWithoutFourthSubject;
-    private String hscExamYear;
-    private String hscStudyGroup;
-    private String hscInstitutionName;
-    private String hscBoard;
 
     public Integer getId() {
         return id;
