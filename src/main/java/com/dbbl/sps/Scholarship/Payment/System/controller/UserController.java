@@ -83,7 +83,9 @@ public class UserController {
 //                usersRepository.save(users);
                 students.setUserId(dbUser.getId());
                 Students current = userService.getStudentByUserId(students.getUserId());
-                students.setGender(current.getGender());
+                if(students.getGender() == null || students.getGender().isEmpty()){
+                    students.setGender(current.getGender());
+                }
                 userService.saveStudent(students);
                 return "redirect:/success?message=Information updated successfully.";
             }
