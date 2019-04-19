@@ -1,0 +1,66 @@
+
+--CLEAR ALL--
+DELETE FROM STUDENTS;
+DELETE FROM USERS;
+DELETE FROM ELIGIBLE_STUDENTS;
+
+--USERS TABLE--
+INSERT INTO USERS VALUES('admin', 'admin','a',1);
+INSERT INTO USERS VALUES('siyam', 'siyam','s',2);
+INSERT INTO USERS VALUES('summit', 'summit','s',3);
+INSERT INTO USERS VALUES('setu', 'setu','s',4);
+INSERT INTO USERS VALUES('sadia', 'sadia','s',5);
+
+--STUDENTS TABLE--
+INSERT INTO STUDENTS VALUES(
+1,
+2,
+'Moshiur', 'Rahman',
+'Majed Ali','Parvin Akter',
+'Male',
+'Dheli Karatia', null, 'Karatia-1903', 'Tangail', 'Tangail', '1672183057',
+130558, 5.00, 4.88, 2010,'Science','Bindu Basini Govt Boys High School, Tangail',
+134444, 5.00, 5.00, 2012,'Science','Major General Mahmudul Hasan College, Tangail',
+'Dhaka', 'Dhaka');
+
+INSERT INTO STUDENTS VALUES(
+2,
+3,
+'Summit', 'Haque',
+'Mr','Mrs',
+'Male',
+'Vill', null, 'Post', 'Thana', 'District', '1672183057',
+1, 5.00, 5.00, 2010,'Science','Bindu Basini Govt Boys High School, Tangail',
+2, 5.00, 5.00, 2012,'Science','Major General Mahmudul Hasan College, Tangail',
+'Dhaka', 'Dhaka');
+
+INSERT INTO STUDENTS VALUES(
+3,
+4,
+'Setu', 'Rahman',
+'Mr','Mrs',
+'Female',
+'Vill', null, 'Post', 'Thana', 'District', '1672183057',
+3, 4.00, 4.80, 2010,'Science','Bindu Basini Govt Boys High School, Tangail',
+4, 4.50, 4.94,2012,'Science','Major General Mahmudul Hasan College, Tangail',
+'Dhaka', 'Dhaka');
+
+
+INSERT INTO STUDENTS VALUES(
+4,
+5,
+'Sadia', 'Afrin',
+'Mr','Mrs',
+'Female',
+'Vill', null, 'Post', 'Thana', 'District', '1672183057',
+4, 5.00, 5.00, 2010,'Science','Bindu Basini Govt Boys High School, Tangail',
+5, 5.00, 5.00,2012,'Science','Major General Mahmudul Hasan College, Tangail',
+'Dhaka', 'Dhaka');
+
+delete from eligible_students;
+
+commit;
+
+SELECT * FROM USERS;
+SELECT * FROM STUDENTS;
+SELECT * FROM ELIGIBLE_STUDENTS;
