@@ -94,6 +94,8 @@ public class UserController {
 //                users.setId(dbUser.getId());
 //                usersRepository.save(users);
                 students.setUserId(dbUser.getId());
+                Students current = studentsRepository.findByUserId(students.getUserId());
+                students.setGender(current.getGender());
                 studentsRepository.save(students);
                 return "redirect:/success?message=Information updated successfully.";
             }

@@ -28,15 +28,29 @@
         <thead>
         <tr>
             <th class="success">Name</th>
+            <th class="success">SSC Roll</th>
+            <th class="success">SSC GPA</th>
+            <th class="success">SSC GPA (With 4th Sub)</th>
             <th class="success">SSC Passing Year</th>
+            <th class="success">HSC Roll</th>
+            <th class="success">HSC GPA</th>
+            <th class="success">HSC GPA (With 4th Sub)</th>
             <th class="success">HSC Passing Year</th>
+            <th class="success">District</th>
             <th class="success">ACTION</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="student : ${students}">
-            <td><span th:text="${student.firstName +' ' + student.lastName}"> Student Name </span></td>
+            <td><span th:text="${student.firstName +' ' + student.lastName}"> Name </span></td>
+            <td><span th:text="${student.sscRoll}"> SSC Roll </span></td>
+            <td><span th:text="${student.sscGpaWithoutFourthSubject}"> SSC GPA </span></td>
+            <td><span th:text="${student.sscGpaWithFourthSubject}"> SSC GPA (With 4th Sub)</span></td>
             <td><span th:text="${student.sscExamYear}"> SSC Passing Year </span></td>
+            <td><span th:text="${student.hscRoll}"> HSC Roll </span></td>
+            <td><span th:text="${student.hscGpaWithoutFourthSubject}"> HSC GPA</span></td>
+            <td><span th:text="${student.hscGpaWithFourthSubject}"> HSC GPA (With 4th Sub)</span></td>
+            <td><span th:text="${student.district}"> District </span></td>
             <td><span th:text="${student.hscExamYear}"> HSC Passing Year </span></td>
             <td>
                 <a class="btn btn-danger btn-block"
@@ -62,7 +76,7 @@
           url:'/scholarship/generate',
           success: function(){
               alert('Result Generated');
-              window.location = '/result';
+              window.location = '/result?ust=a';
           }
         });
     }
