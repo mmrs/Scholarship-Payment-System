@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(Model model, Users users) {
+    public String loginUser(Users users) {
         Users dbUser = userService.getUserAgainstPassword(users);
         if (dbUser == null) {
             return "redirect:/login?error=" + "Wrong Username or Password";
@@ -80,8 +80,6 @@ public class UserController {
         Users dbUser = userService.findByUserName(users.getUserName());
         if (dbUser != null) {
             if (dbUser.getPassword().equals(users.getPassword())) {
-//                users.setId(dbUser.getId());
-//                usersRepository.save(users);
                 students.setUserId(dbUser.getId());
                 Students current = userService.getStudentByUserId(students.getUserId());
                 if(students.getGender() == null || students.getGender().isEmpty()){
