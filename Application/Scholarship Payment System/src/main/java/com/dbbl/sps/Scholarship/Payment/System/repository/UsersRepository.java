@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface UsersRepository extends JpaRepository<Users, Integer> {
 
     Users findByUserNameAndPassword(String userName, String password);
+
     Users findByUserName(String userName);
 
     @Query(value = "SELECT MAX(id) from users", nativeQuery = true)

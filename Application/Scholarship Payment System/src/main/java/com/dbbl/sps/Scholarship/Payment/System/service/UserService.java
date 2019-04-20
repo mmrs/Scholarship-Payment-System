@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     @Autowired
     UsersRepository usersRepository;
@@ -19,20 +19,20 @@ public class UserService implements IUserService{
     StudentsRepository studentsRepository;
 
     @Override
-    public Users getUserAgainstPassword(Users users){
+    public Users getUserAgainstPassword(Users users) {
         Users dbUser = usersRepository.findByUserNameAndPassword(users.getUserName(), users.getPassword());
-        return  dbUser;
+        return dbUser;
     }
 
     @Override
-    public Optional<Users> getUserById(String userId){
+    public Optional<Users> getUserById(String userId) {
         Integer id = Integer.parseInt(userId);
         Optional<Users> users = usersRepository.findById(id);
-        return  users;
+        return users;
     }
 
     @Override
-    public Students getStudentByUserId(Integer userId){
+    public Students getStudentByUserId(Integer userId) {
         return studentsRepository.findByUserId(userId);
     }
 
@@ -53,7 +53,7 @@ public class UserService implements IUserService{
 
     @Override
     public int getMaxUserId() {
-        return  usersRepository.getMaxId();
+        return usersRepository.getMaxId();
     }
 
     @Override

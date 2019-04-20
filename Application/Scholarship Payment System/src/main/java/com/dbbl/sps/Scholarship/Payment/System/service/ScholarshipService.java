@@ -81,6 +81,6 @@ public class ScholarshipService implements IScholarshipService {
                 studentsList.add(students.get());
             }
         }
-        return  studentsList;
+        return studentsList;
     }
 }

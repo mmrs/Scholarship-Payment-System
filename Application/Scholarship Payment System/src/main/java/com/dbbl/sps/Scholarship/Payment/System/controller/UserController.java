@@ -82,7 +82,7 @@ public class UserController {
             if (dbUser.getPassword().equals(users.getPassword())) {
                 students.setUserId(dbUser.getId());
                 Students current = userService.getStudentByUserId(students.getUserId());
-                if(students.getGender() == null || students.getGender().isEmpty()){
+                if (students.getGender() == null || students.getGender().isEmpty()) {
                     students.setGender(current.getGender());
                 }
                 userService.saveStudent(students);
@@ -124,12 +124,12 @@ public class UserController {
 
         List<Students> studentsList = scholarshipService.getEligibleStudents();
         model.addAttribute("students", studentsList);
-        model.addAttribute("ust",ust);
+        model.addAttribute("ust", ust);
         return "resultList";
     }
 
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         return "redirect:/";
     }
 }
