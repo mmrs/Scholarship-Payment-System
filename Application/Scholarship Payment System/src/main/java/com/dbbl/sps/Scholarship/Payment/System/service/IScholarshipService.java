@@ -8,7 +8,7 @@ public interface IScholarshipService {
 
     List<Students> prepareEligibleStudentList();
 
-    Boolean resultGenerate();
+    Boolean resultGenerated();
 
     List<Students> getEligibleStudents();
 }

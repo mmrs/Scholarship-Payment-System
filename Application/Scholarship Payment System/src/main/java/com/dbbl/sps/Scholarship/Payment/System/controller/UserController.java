@@ -43,8 +43,8 @@ public class UserController {
             if (dbUser.getUserType().equals("a")) {
                 return "redirect:/studentList";
             } else {
-                if (scholarshipService.resultGenerate()) {
-                    return "redirect:/result";
+                if (scholarshipService.resultGenerated()) {
+                    return "redirect:/result?ust=s";
                 }
             }
             return "redirect:/register?userId=" + dbUser.getId() + "&user=edit";
@@ -67,6 +67,7 @@ public class UserController {
                 Students students = userService.getStudentByUserId(users.get().getId());
                 registerUser.setStudents(students);
                 model.addAttribute("RegisterUser", registerUser);
+                model.addAttribute("ust", true);
             }
         }
         return "register";
@@ -121,10 +122,16 @@ public class UserController {
     }
 
     @GetMapping("/result")
-    public String Result(Model model) {
+    public String Result(Model model, String ust) {
 
         List<Students> studentsList = scholarshipService.getEligibleStudents();
         model.addAttribute("students", studentsList);
+        model.addAttribute("ust",ust);
         return "resultList";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        return "redirect:/index";
     }
 }

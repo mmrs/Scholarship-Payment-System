@@ -54,7 +54,6 @@ public class ScholarshipService implements IScholarshipService {
             if (selected == maxAllowed) {
                 break;
             }
-            System.out.println(selectedStudents);
         }
 
         eligibleStudentsRepository.deleteAll();
@@ -67,7 +66,7 @@ public class ScholarshipService implements IScholarshipService {
     }
 
     @Override
-    public Boolean resultGenerate() {
+    public Boolean resultGenerated() {
         Boolean result = eligibleStudentsRepository.findAll().size() > 0;
         return result;
     }
